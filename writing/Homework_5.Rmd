@@ -26,3 +26,35 @@ homicide <- read.csv("~/Work/Fall 2023/R for Research/Homework_5/data/homicide-d
 
 
 ```
+
+
+```{r Constricting data}
+#Data just for Atlanta 
+
+homicide <- homicide %>% 
+  unite(col = city_name, city, state, sep = "," )
+
+atlanta <- homicide %>% 
+  filter(city_name %in% "Atlanta,GA")
+
+#three race groups with the highest number of homicides.
+
+atlanta<-atlanta %>% 
+  mutate(victim_race =fct_lump_n(victim_race %>% as.factor, n=3))
+  
+  
+
+```
+
+```{r}
+#Separating cases into solved and unsolved 
+
+at_uns<-atlanta %>% 
+  filter(disposition %in% c("Closed without arrest", "Open/No arrest"))
+at_uns
+
+at_sol<- atlanta %>% 
+  filter(disposition %in% "Closed by arrest")
+at_sol
+
+```
