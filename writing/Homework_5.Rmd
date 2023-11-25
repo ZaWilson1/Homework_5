@@ -58,3 +58,28 @@ at_sol<- atlanta %>%
 at_sol
 
 ```
+```{r}
+#create maps of Atlanta without murders
+library(ggplot2)
+
+GA_counties<-counties(state = "GA", cb = TRUE, class = "sf")
+
+##Specifying Fulton county since its the seat of Atlanta proper
+
+#tracts for Fulton County
+ful_tracts <- tracts("GA", "Fulton", cb = TRUE, year = 2017)
+
+#Block Groups for Fulton County
+ful_block_g <- block_groups("GA", "Fulton", year = 2017)
+
+#subdivisions for Fulton County
+ful_subd<- county_subdivisions("GA", "Fulton", year = 2017)
+
+
+```
+```{r}
+#plot of Fulton County with no murders, chose to do tracts as it looked the best  
+ggplot()+
+  geom_sf(data = ful_tracts, color = "red")
+
+```
