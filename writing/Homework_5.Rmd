@@ -148,3 +148,17 @@ atlanta_1 <- atlanta %>%
   mutate(solved = case_when(disposition == 'Closed by arrest'~ 'solved',
                             disposition == 'Open/No arrest' | disposition == 'Closed without arrest' ~ 'unsolved'))
 ```
+
+```{r}
+#combine all the aspects from above into a comprehensive plot, this time with legends for solved vs unsolved.
+final_plot<- ggplot()+
+  geom_sf(data = ful_tracts, color = "green")+
+  geom_sf(data = clay_tracts, color = "cyan")+
+  geom_sf(data = dek_tracts, color = "black")+
+  geom_point(data = atlanta_1, aes(x = lon, y = lat, color = victim_race, shape = solved), alpha = 0.75, size = 0.75)+
+  ggtitle("Murders in Atlanta")+
+  labs(x = "Longitude", y = "Latitude")+
+  theme_dark()
+final_plot+coord_sf(ylim = c(33.63, 33.85), xlim = c(-84.55, -84.25))
+
+```
