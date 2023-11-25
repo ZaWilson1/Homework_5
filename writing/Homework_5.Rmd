@@ -126,3 +126,17 @@ homicide_plot<- ggplot()+
   theme_dark()
 homicide_plot+coord_sf(ylim = c(33.63, 33.85), xlim = c(-84.55, -84.25))
 ```
+
+```{r}
+#same plot, with races added in 
+race_plot<- ggplot()+
+  geom_sf(data = ful_tracts, color = "green")+
+  geom_sf(data = clay_tracts, color = "cyan")+
+  geom_sf(data = dek_tracts, color = "black")+
+  geom_point(data = at_sol, aes(x = lon, y = lat, shape = victim_race), alpha = 0.5, size = 0.75, color = "blue")+
+  geom_point(data = at_uns, aes(x = lon, y = lat, shape = victim_race), alpha = 0.5, size = 0.75, color = "red")+
+  ggtitle("Murders in Atlanta")+
+  labs(x = "Longitude", y = "Latitude")+
+  theme_dark()
+race_plot+coord_sf(ylim = c(33.63, 33.85), xlim = c(-84.55, -84.25))
+```
