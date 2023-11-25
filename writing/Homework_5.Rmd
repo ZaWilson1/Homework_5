@@ -83,3 +83,33 @@ ggplot()+
   geom_sf(data = ful_tracts, color = "red")
 
 ```
+```{r}
+#try to add all murders to the plot
+ggplot()+
+  geom_sf(data = ful_tracts, color = "blue")+
+  geom_point(data = atlanta, aes(x = lon, y = lat))+
+  ggtitle("Murders in Atlanta, County seat of Fulton")+
+  labs(x = "Longitude", y = "Latitude")
+
+```
+Some murders fall outside of Fulton County, so I need to add DeKalb and Clayton counties as well 
+
+```{r}
+#tracts for DeKalb county
+dek_tracts<- tracts("GA", "DeKalb", year = 2017, cb = TRUE)
+
+#tracts for Clayton County
+clay_tracts <- tracts("GA", "Clayton", year= 2017, cb = TRUE)
+```
+```{r}
+#plot with DeKalb and Clayton Counties as well
+ggplot()+
+  geom_sf(data = ful_tracts, color = "blue")+
+  geom_sf(data = clay_tracts, color = "green")+
+  geom_sf(data = dek_tracts, color = "red")+
+  geom_point(data = atlanta, aes(x = lon, y = lat), alpha = 0.5, size = 0.75, color = "black")+
+  ggtitle("Murders in Atlanta")+
+  labs(x = "Longitude", y = "Latitude")+
+  theme_dark()
+
+```
