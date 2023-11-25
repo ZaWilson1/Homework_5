@@ -162,3 +162,18 @@ final_plot<- ggplot()+
 final_plot+coord_sf(ylim = c(33.63, 33.85), xlim = c(-84.55, -84.25))
 
 ```
+
+```{r}
+final_plot2<- ggplot()+
+  geom_sf(data = ful_tracts, color = "gray")+
+  geom_sf(data = clay_tracts, color = "cyan")+
+  geom_sf(data = dek_tracts, color = "black")+
+  geom_point(data = atlanta_1, aes(x = lon, y = lat, color = victim_race), alpha = 0.75, size = 0.75)+
+  ggtitle("Murders in Atlanta")+
+  labs(x = "Longitude", y = "Latitude", color = "victim race")+
+  facet_wrap(~solved)+
+  theme_bw()
+
+
+final_plot2+coord_sf(ylim = c(33.63, 33.85), xlim = c(-84.55, -84.25))
+```
