@@ -140,3 +140,11 @@ race_plot<- ggplot()+
   theme_dark()
 race_plot+coord_sf(ylim = c(33.63, 33.85), xlim = c(-84.55, -84.25))
 ```
+
+```{r}
+##Going to try and create the same plot but with the original Atlanta data set, creating a new variable that determines if the case is solved or unsolved
+
+atlanta_1 <- atlanta %>% 
+  mutate(solved = case_when(disposition == 'Closed by arrest'~ 'solved',
+                            disposition == 'Open/No arrest' | disposition == 'Closed without arrest' ~ 'unsolved'))
+```
