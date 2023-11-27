@@ -5,9 +5,7 @@ date: "2023-11-25"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 
 Goal is to create a map showing the locations of homicides in Atlanta, GA. Use sf and tigris to download boundaries for the sub city geography (tracts, block groups, county subdivisions) to show as a layer underneath the points showing homicides. Differentiate solved and unsolved homicides using facets and show the three race groups with the highest number of homicides for the city. 
