@@ -2,7 +2,9 @@
 title: "Homework_5"
 author: "Zane Wilson"
 date: "2023-11-25"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 
@@ -16,7 +18,7 @@ knitr::opts_chunk$set(warning = FALSE)
 ```
 
 
-```{r}
+```{r, echo = FALSE, include=FALSE}
 library(tidyverse)
 library(tigris)
 library(sf)
@@ -27,7 +29,7 @@ homicide <- read.csv("~/Work/Fall 2023/R for Research/Homework_5/data/homicide-d
 ```
 
 
-```{r Constricting data}
+```{r Constricting data, echo=FALSE}
 #Data just for Atlanta 
 
 homicide <- homicide %>% 
@@ -45,7 +47,7 @@ atlanta<-atlanta %>%
 
 ```
 
-```{r}
+```{r, echo=FALSE}
 #Separating cases into solved and unsolved 
 
 at_uns<-atlanta %>% 
@@ -55,7 +57,8 @@ at_sol<- atlanta %>%
   filter(disposition %in% "Closed by arrest")
 
 ```
-```{r}
+
+```{r, echo=FALSE, include=FALSE}
 #create maps of Atlanta without murders
 library(ggplot2)
 
@@ -74,12 +77,14 @@ ful_subd<- county_subdivisions("GA", "Fulton", year = 2017)
 
 
 ```
-```{r}
+
+```{r, echo = FALSE, include=FALSE}
 #plot of Fulton County with no murders, chose to do tracts as it looked the best  
 ggplot()+
   geom_sf(data = ful_tracts, color = "red")
 
 ```
+
 ```{r}
 #try to add all murders to the plot
 ggplot()+
@@ -89,9 +94,13 @@ ggplot()+
   labs(x = "Longitude", y = "Latitude")
 
 ```
+\newpage
+
+
+
 Some murders fall outside of Fulton County, so I need to add DeKalb and Clayton counties as well 
 
-```{r}
+```{r, include=FALSE}
 #tracts for DeKalb county
 dek_tracts<- tracts("GA", "DeKalb", year = 2017, cb = TRUE)
 
@@ -110,7 +119,7 @@ ggplot()+
   theme_dark()
 
 ```
-```{r}
+```{r, include=FALSE}
 #plot with unsolved murders and solved murders 
 homicide_plot<- ggplot()+
   geom_sf(data = ful_tracts, color = "green")+
@@ -124,7 +133,7 @@ homicide_plot<- ggplot()+
 homicide_plot+coord_sf(ylim = c(33.63, 33.85), xlim = c(-84.55, -84.25))
 ```
 
-```{r}
+```{r, include=FALSE}
 #same plot, with races added in 
 race_plot<- ggplot()+
   geom_sf(data = ful_tracts, color = "green")+
@@ -138,7 +147,7 @@ race_plot<- ggplot()+
 race_plot+coord_sf(ylim = c(33.63, 33.85), xlim = c(-84.55, -84.25))
 ```
 
-```{r}
+```{r, include=FALSE}
 ##Going to try and create the same plot but with the original Atlanta data set, creating a new variable that determines if the case is solved or unsolved
 
 atlanta_1 <- atlanta %>% 
@@ -146,7 +155,7 @@ atlanta_1 <- atlanta %>%
                             disposition == 'Open/No arrest' | disposition == 'Closed without arrest' ~ 'unsolved'))
 ```
 
-```{r}
+```{r, include=FALSE}
 #combine all the aspects from above into a comprehensive plot, this time with legends for solved vs unsolved.
 final_plot<- ggplot()+
   geom_sf(data = ful_tracts, color = "green")+
