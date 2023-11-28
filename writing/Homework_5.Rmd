@@ -12,6 +12,7 @@ Goal is to create a map showing the locations of homicides in Atlanta, GA. Use s
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
 ```
 
 
@@ -49,11 +50,9 @@ atlanta<-atlanta %>%
 
 at_uns<-atlanta %>% 
   filter(disposition %in% c("Closed without arrest", "Open/No arrest"))
-at_uns
 
 at_sol<- atlanta %>% 
   filter(disposition %in% "Closed by arrest")
-at_sol
 
 ```
 ```{r}
